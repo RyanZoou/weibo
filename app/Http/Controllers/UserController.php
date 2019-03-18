@@ -10,12 +10,12 @@ class UserController extends Controller
 {
     public function create()
     {
-        return view('user.create');
+        return view('users.create');
     }
 
     public function show(User $user)
     {
-        return view('user.show', compact('user'));
+        return view('users.show', compact('user'));
     }
 
     public function store(Request $request)
@@ -35,5 +35,10 @@ class UserController extends Controller
         Auth::login($user);
         session()->flash('success', '欢迎，您将在这里开启一段新的旅程~');
         return redirect()->route('users.show', [$user]);
+    }
+
+    public function edit(User $user)
+    {
+        return view('users.edit', compact('user'));
     }
 }
