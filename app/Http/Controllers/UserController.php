@@ -8,6 +8,19 @@ use Auth;
 
 class UserController extends Controller
 {
+    public function __construct()
+    {
+        //设置除了 'show', 'create', 'store' 外，其他方法必须登录验证之后才能访问
+        $this->middleware('auth', [
+            'except' => ['show', 'create', 'store']
+        ]);
+
+        //设置只有游客才能放注册页，才能提交注册
+        $this->middleware('guest',[
+            'only' => ['create', 'store']
+        ]);
+    }
+
     public function create()
     {
         return view('users.create');
@@ -39,11 +52,13 @@ class UserController extends Controller
 
     public function edit(User $user)
     {
+        $this->authorize('update', $user);
         return view('users.edit', compact('user'));
     }
 
     public function update(User $user, Request $request)
     {
+        $this->authorize('update', $user);
         $this->validate($request, [
             'name' => 'required|max:50',
             'password' => 'nullable|confirmed|min:6'
