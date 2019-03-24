@@ -12,7 +12,7 @@ class UserController extends Controller
     {
         //设置除了 'show', 'create', 'store' 外，其他方法必须登录验证之后才能访问
         $this->middleware('auth', [
-            'except' => ['show', 'create', 'store']
+            'except' => ['show', 'create', 'store', 'index']
         ]);
 
         //设置只有游客才能放注册页，才能提交注册
@@ -74,6 +74,12 @@ class UserController extends Controller
         session()->flash('success', '个人资料更新成功');
 
         return redirect()->route('users.show', $user);
+    }
+
+    public function index()
+    {
+        $users = User::paginate(10);
+        return view('users.index', compact('users'));
     }
 
 }
