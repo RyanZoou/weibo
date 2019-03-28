@@ -5,7 +5,6 @@ namespace App\Models;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use App\Models\Status;
 
 class User extends Authenticatable
 {
@@ -61,7 +60,7 @@ class User extends Authenticatable
 
     public function statuses()
     {
-        return $this->hasMany(Status:class);
+        return $this->hasMany(Status::class);
     }
 
 }
