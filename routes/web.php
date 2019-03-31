@@ -32,6 +32,9 @@ Route::post('password/reset', 'Auth\ResetPasswordController@reset')->name('passw
 
 Route::resource('statuses', 'StatusesController', ['only' => ['store', 'destroy']]);
 
+Route::get('/user/{user}/followings', 'UserController@followings')->name('users.followings');
+Route::get('/user/{user}/followers', 'UserController@followers')->name('users.followers');
+
 Route::get('logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index');
 
 
