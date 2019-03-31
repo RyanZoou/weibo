@@ -35,6 +35,9 @@ Route::resource('statuses', 'StatusesController', ['only' => ['store', 'destroy'
 Route::get('/user/{user}/followings', 'UserController@followings')->name('users.followings');
 Route::get('/user/{user}/followers', 'UserController@followers')->name('users.followers');
 
+Route::post('/user/followers/{user}', 'FollowersController@store')->name('followers.store');
+Route::delete('/user/followers/{user}', 'FollowersController@destroy')->name('followers.destroy');
+
 Route::get('logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index');
 
 
